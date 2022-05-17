@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct OITUApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
+                .environmentObject(AuthManager())
         }
     }
 }

@@ -8,17 +8,39 @@
 
 /* Begin PBXBuildFile section */
 		D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */; };
-		D2C5AC7F2832AA9F00CDD5D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC7E2832AA9F00CDD5D5 /* ContentView.swift */; };
 		D2C5AC812832AAA100CDD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */; };
 		D2C5AC842832AAA100CDD5D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC832832AAA100CDD5D5 /* Preview Assets.xcassets */; };
+		D2C5AC8B28331B8800CDD5D5 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC8A28331B8800CDD5D5 /* AuthManager.swift */; };
+		D2C5AC8E28331D4B00CDD5D5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */; };
+		D2C5AC9028331D7B00CDD5D5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */; };
+		D2C5AC9428331E8D00CDD5D5 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9328331E8D00CDD5D5 /* AuthResponse.swift */; };
+		D2C5AC962833247B00CDD5D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC952833247B00CDD5D5 /* User.swift */; };
+		D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC972833252500CDD5D5 /* LibraryView.swift */; };
+		D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9B283328C600CDD5D5 /* APICaller.swift */; };
+		D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9D283328F300CDD5D5 /* APIImage.swift */; };
+		D2C5ACA02833290200CDD5D5 /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */; };
+		D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA12833291100CDD5D5 /* Playlist.swift */; };
+		D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA32833292200CDD5D5 /* Playlists.swift */; };
+		D2C5ACA62833292E00CDD5D5 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D2C5AC792832AA9F00CDD5D5 /* OITU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OITU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OITUApp.swift; sourceTree = "<group>"; };
-		D2C5AC7E2832AA9F00CDD5D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2C5AC832832AAA100CDD5D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D2C5AC8A28331B8800CDD5D5 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D2C5AC9328331E8D00CDD5D5 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		D2C5AC952833247B00CDD5D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D2C5AC972833252500CDD5D5 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		D2C5AC9B283328C600CDD5D5 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		D2C5AC9D283328F300CDD5D5 /* APIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImage.swift; sourceTree = "<group>"; };
+		D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
+		D2C5ACA12833291100CDD5D5 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		D2C5ACA32833292200CDD5D5 /* Playlists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlists.swift; sourceTree = "<group>"; };
+		D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +73,13 @@
 		D2C5AC7B2832AA9F00CDD5D5 /* OITU */ = {
 			isa = PBXGroup;
 			children = (
+				D2C5AC9A283328AD00CDD5D5 /* Managers */,
+				D2C5AC9228331E6600CDD5D5 /* Models */,
+				D2C5AC8C28331CC600CDD5D5 /* Views */,
 				D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */,
-				D2C5AC7E2832AA9F00CDD5D5 /* ContentView.swift */,
 				D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */,
 				D2C5AC822832AAA100CDD5D5 /* Preview Content */,
+				D2C5AC952833247B00CDD5D5 /* User.swift */,
 			);
 			path = OITU;
 			sourceTree = "<group>";
@@ -65,6 +90,38 @@
 				D2C5AC832832AAA100CDD5D5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D2C5AC8C28331CC600CDD5D5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */,
+				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
+				D2C5AC972833252500CDD5D5 /* LibraryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D2C5AC9228331E6600CDD5D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5AC9328331E8D00CDD5D5 /* AuthResponse.swift */,
+				D2C5AC9D283328F300CDD5D5 /* APIImage.swift */,
+				D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */,
+				D2C5ACA12833291100CDD5D5 /* Playlist.swift */,
+				D2C5ACA32833292200CDD5D5 /* Playlists.swift */,
+				D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2C5AC9A283328AD00CDD5D5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5AC8A28331B8800CDD5D5 /* AuthManager.swift */,
+				D2C5AC9B283328C600CDD5D5 /* APICaller.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +194,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C5AC7F2832AA9F00CDD5D5 /* ContentView.swift in Sources */,
+				D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */,
+				D2C5AC9028331D7B00CDD5D5 /* AuthView.swift in Sources */,
+				D2C5AC8B28331B8800CDD5D5 /* AuthManager.swift in Sources */,
+				D2C5AC962833247B00CDD5D5 /* User.swift in Sources */,
+				D2C5AC8E28331D4B00CDD5D5 /* LoginView.swift in Sources */,
+				D2C5AC9428331E8D00CDD5D5 /* AuthResponse.swift in Sources */,
+				D2C5ACA02833290200CDD5D5 /* AudioTrack.swift in Sources */,
 				D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */,
+				D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */,
+				D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */,
+				D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */,
+				D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */,
+				D2C5ACA62833292E00CDD5D5 /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +343,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -304,6 +373,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
