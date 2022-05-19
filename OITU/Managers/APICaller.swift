@@ -65,11 +65,12 @@ final class APICaller: ObservableObject {
                     }
 
                     do {
-//                        let result = try JSONDecoder().decode(UserProfile.self, from: data)
-                        let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                        print("trying to print user playlists")
-                        print(result)
-//                        completion(.success(result))
+                        let result = try JSONDecoder().decode(Playlists.self, from: data)
+//                        let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                        print("trying to print user playlists")
+//                        print(result)
+                        let resultPlaylists = result.items
+                        completion(.success(resultPlaylists))
                     }
                     catch {
 //                        completion(.failure(error))

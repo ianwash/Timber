@@ -22,6 +22,7 @@
 		D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA12833291100CDD5D5 /* Playlist.swift */; };
 		D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA32833292200CDD5D5 /* Playlists.swift */; };
 		D2C5ACA62833292E00CDD5D5 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */; };
+		D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		D2C5ACA12833291100CDD5D5 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		D2C5ACA32833292200CDD5D5 /* Playlists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlists.swift; sourceTree = "<group>"; };
 		D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */,
 				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
 				D2C5AC972833252500CDD5D5 /* LibraryView.swift */,
+				D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				D2C5ACA02833290200CDD5D5 /* AudioTrack.swift in Sources */,
 				D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */,
 				D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */,
+				D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */,
 				D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */,
 				D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */,
 				D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */,

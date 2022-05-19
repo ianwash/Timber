@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var apiCaller: APICaller
     // controls whether we show the login sheet or not
     @State private var showingSheet = false
     
     var body: some View {
-        if let user = authManager.user {
+        if let user = apiCaller.authManager.user {
             LibraryView()
                 .environmentObject(user)
         }
@@ -37,7 +37,7 @@ struct LoginView: View {
                             .font(.system(size: 18))
                     })
                     .sheet(isPresented: $showingSheet) {
-                        AuthView(showingSheet: $showingSheet, url: authManager.signInURL!)
+                        AuthView(showingSheet: $showingSheet, url: apiCaller.authManager.signInURL!)
                     }
             }
         }

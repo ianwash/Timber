@@ -6,3 +6,8 @@
 //
 
 import Foundation
+struct APIImage: Codable, Equatable {
+    let url: String
+//    let height: Int
+//    let width: Int
+}

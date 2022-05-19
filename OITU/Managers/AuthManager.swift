@@ -13,7 +13,6 @@ final class AuthManager: ObservableObject {
     private var refreshingToken = false
     
     @Published var user: User?
-    var apiCaller: APICaller?
 
     struct Constants {
         static let clientID = ""
@@ -23,9 +22,9 @@ final class AuthManager: ObservableObject {
 
     init() {
 //      handle if the stored token is expired, show loading state eventually
-//        if let accessToken = accessToken, let refreshToken = refreshToken, let tokenExpirationDate = tokenExpirationDate {
-//            user = User()
-//        }
+        if let accessToken = accessToken, let refreshToken = refreshToken, let tokenExpirationDate = tokenExpirationDate {
+            user = User()
+        }
     }
 
     public var signInURL: URL? {
@@ -115,7 +114,6 @@ final class AuthManager: ObservableObject {
         let result = try JSONDecoder().decode(AuthResponse.self, from: data)
         cacheToken(result: result)
         user = User()
-        apiCaller = APICaller(authManager: self)
     }
 
     public func cacheToken(result: AuthResponse){

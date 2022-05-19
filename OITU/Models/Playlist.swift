@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Playlist: Codable {
+struct Playlist: Codable, Equatable {
     let id: String
     let images: [APIImage]
     let name: String

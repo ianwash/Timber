@@ -13,7 +13,7 @@ struct OITUApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView()
-                .environmentObject(AuthManager())
+                .environmentObject(APICaller(authManager: AuthManager()))
         }
     }
 }
