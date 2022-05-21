@@ -8,14 +8,13 @@
 import Foundation
 
 class User: ObservableObject {
+    var sourcePlaylist: Playlist
+    var destinationPlaylist: Playlist
     
-    init() {}
     
-    //creates the global variables
-    var sourcePlaylist = ""
-    var destinationPlaylist = ""
-    var newPlaylistName = ""
-    var isLoggedIn = false
-    
+    init() {
+        self.sourcePlaylist = Playlist(id: "", images: [APIImage(url: "")], name: "")
+        self.destinationPlaylist = Playlist(id: "", images: [], name: "")
+    }
     
 }

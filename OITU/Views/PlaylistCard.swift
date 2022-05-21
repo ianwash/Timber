@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlaylistCard: View {
     var playlist: Playlist
+    let dimension = (UIScreen.main.bounds.width / 2) - 20
     
     var body: some View {
         VStack(spacing: 0) {
@@ -18,29 +19,44 @@ struct PlaylistCard: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 175, height: 175)
+                        .frame(width: dimension, height: dimension)
                 case .empty:
                     ProgressView()
-                case .failure(let error):
-                    let _ = print(error.localizedDescription)
-                    EmptyView()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: dimension, height: dimension)
+                case .failure:
+                    AsyncImage(url: URL(string: playlist.images[0].url), scale: 4.0) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: dimension, height: dimension)
+                        } else {
+                            Image(systemName: "xmark.octagon")
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: dimension, height: dimension)
+                        }
+                    }
                 @unknown default:
-                    EmptyView()
+                    Image(systemName: "xmark.octagon")
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: dimension, height: dimension)
                 }
             }
             
             HStack {
+                Text("\(playlist.name)")
+                    .lineLimit(1)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 15))
                 Spacer()
-                Text("\(playlist.name) \n")
-                    .lineLimit(2)
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 18))
-                Spacer()
+                Text("\n")
             }
-            .background(Color(.systemGray4))
+            .background(Color.black)
+            .frame(width: dimension)
         }
-        .cornerRadius(15)
         .clipped()
+        .padding(10)
     }
 }
 

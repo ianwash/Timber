@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct AuthView: UIViewRepresentable {
-    
+    @EnvironmentObject var apiCaller: APICaller
     class Coordinator: NSObject, WKNavigationDelegate {
         var parent: AuthView
         
@@ -31,7 +31,7 @@ struct AuthView: UIViewRepresentable {
             
             Task {
                 do {
-                    try await parent.authManager.exchangeCodeForToken(code: code)
+                    try await parent.apiCaller.authManager.exchangeCodeForToken(code: code)
                     await MainActor.run(body: {
                         parent.showingSheet = false
                     })

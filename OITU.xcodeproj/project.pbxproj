@@ -23,6 +23,7 @@
 		D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA32833292200CDD5D5 /* Playlists.swift */; };
 		D2C5ACA62833292E00CDD5D5 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */; };
 		D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */; };
+		D2C5ACAC283886EE00CDD5D5 /* PlaylistMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D2C5ACA32833292200CDD5D5 /* Playlists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlists.swift; sourceTree = "<group>"; };
 		D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCard.swift; sourceTree = "<group>"; };
+		D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
 				D2C5AC972833252500CDD5D5 /* LibraryView.swift */,
 				D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */,
+				D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C5ACAC283886EE00CDD5D5 /* PlaylistMenu.swift in Sources */,
 				D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */,
 				D2C5AC9028331D7B00CDD5D5 /* AuthView.swift in Sources */,
 				D2C5AC8B28331B8800CDD5D5 /* AuthManager.swift in Sources */,
@@ -349,7 +353,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,7 +383,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

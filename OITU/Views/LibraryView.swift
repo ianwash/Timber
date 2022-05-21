@@ -12,43 +12,73 @@ struct LibraryView: View {
     @State var playlists = [Playlist]()
     @State var searchText = ""
     @State var filteredPlaylists = [Playlist]()
-    private var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
-
+    @State var menuSheet = false
     
+    var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: twoColumnGrid, spacing: 8) {
-                            ForEach(filteredPlaylists, id: \.id) { playlist in
-                                Button(action: {
-                                    print(playlist.name)
-                                }) {
-                                    PlaylistCard(playlist: playlist)
+        ZStack {
+            Color.black.ignoresSafeArea()
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: false) {
+                            LazyVGrid(columns: twoColumnGrid, spacing: 8) {
+                                ForEach(filteredPlaylists, id: \.id) { playlist in
+//                                    Button(action: {
+//                                        print(playlist.name)
+//                                    }) {
+//                                        PlaylistCard(playlist: playlist)
+//                                    }
+                                    
+                                    
+                                    Button(action: {
+                                        apiCaller.authManager.user?.sourcePlaylist = playlist
+                                        menuSheet.toggle()
+                                        }, label: {
+                                            PlaylistCard(playlist: playlist)
+                                        })
+                                        .sheet(isPresented: $menuSheet) {
+                                            PlaylistMenu()
+                                        }
                                 }
                             }
+                            .padding(.horizontal)
+                }.onAppear(perform: loadData)
+                    .background(Color.black)
+                    .navigationTitle(Text("Your Playlists"))
+            }
+            .searchable(text: $searchText)
+            .onChange(of: playlists) { newValue in
+                filteredPlaylists = newValue.filter({ playlist in
+                    guard !searchText.isEmpty else {
+                        return true
+                    }
+                    let fullPlaylistName = playlist.name.components(separatedBy: " ")
+                    let lengthOfSearch = searchText.count
+                    for word in fullPlaylistName {
+                        if word.prefix(lengthOfSearch).lowercased() == searchText.lowercased() {
+                            return true
                         }
-                        .padding(.horizontal)
-            }.onAppear(perform: loadData)
-                .background(Color.white)
-                .navigationTitle(Text("your playlists"))
+                    }
+                    return false
+                })
+            }
+            .onChange(of: searchText) { newValue in
+                filteredPlaylists = playlists.filter({ playlist in
+                    guard !newValue.isEmpty else {
+                        return true
+                    }
+                    let fullPlaylistName = playlist.name.components(separatedBy: " ")
+                    let lengthOfSearch = searchText.count
+                    for word in fullPlaylistName {
+                        if word.prefix(lengthOfSearch).lowercased() == searchText.lowercased() {
+                            return true
+                        }
+                    }
+                    return false
+                })
+            }
         }
-        .searchable(text: $searchText)
-        .onChange(of: playlists) { newValue in
-            filteredPlaylists = newValue.filter({ playlist in
-                guard !searchText.isEmpty else {
-                    return true
-                }
-                return playlist.name.lowercased().contains(searchText.lowercased())
-            })
-        }
-        .onChange(of: searchText) { newValue in
-            filteredPlaylists = playlists.filter({ playlist in
-                guard !newValue.isEmpty else {
-                    return true
-                }
-                return playlist.name.lowercased().contains(newValue.lowercased())
-            })
-        }
+        .preferredColorScheme(.dark)
     }
     
     func loadData() {
@@ -60,17 +90,10 @@ struct LibraryView: View {
                                print(playlists)
                            case .failure(let error):
                                print(error.localizedDescription)
-           //                    self?.failedToGetProfile()
                            }
                        }
                    }
         }
-}
-
-struct LibraryView_Previews: PreviewProvider {
-    static var previews: some View {
-        LibraryView()
-    }
 }
 
 
