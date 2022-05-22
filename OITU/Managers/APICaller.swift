@@ -53,7 +53,7 @@ final class APICaller: ObservableObject {
     // gets current user playlists
     @MainActor public func getCurrentUserPlaylists(completion: @escaping (Result<[Playlist], Error>) -> Void) {
             createRequest(
-                with: URL(string: Constants.baseAPIURL + "/me/playlists"),
+                with: URL(string: Constants.baseAPIURL + "/me/playlists?limit=50"),
                 type: .GET)
             { baseRequest in
                 let task = URLSession.shared.dataTask(with: baseRequest) { data,
@@ -66,14 +66,11 @@ final class APICaller: ObservableObject {
 
                     do {
                         let result = try JSONDecoder().decode(Playlists.self, from: data)
-//                        let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-//                        print("trying to print user playlists")
-//                        print(result)
                         let resultPlaylists = result.items
                         completion(.success(resultPlaylists))
                     }
                     catch {
-//                        completion(.failure(error))
+                        completion(.failure(error))
                     }
                 }
                 task.resume()
@@ -81,8 +78,79 @@ final class APICaller: ObservableObject {
     }
 
     // creates a new playlist
-    public func createPlaylist(with name: String) {
+    @MainActor public func createPlaylist(with name: String, completion: @escaping (Result<Playlist, Error>) -> Void) {
+        getCurrentUserProfile { [weak self] result in
+            switch result {
+            case .success(let profile):
+                let urlString = Constants.baseAPIURL + "/users/\(profile.id)/playlists"
+                
+                self?.createRequest(
+                    with: URL(string: urlString),
+                    type: .POST)
+                { baseRequest in
+                    
+                    var request = baseRequest
+                    let json = [
+                        "name": name
+                    ]
+                    request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
+                    let task = URLSession.shared.dataTask(with: request) { data,
+                        _,
+                        error in
+                        guard let data = data, error == nil else {
+                            completion(.failure(APIError.failedToGetData))
+                            return
+                        }
 
+                        do {
+                            let result = try JSONDecoder().decode(Playlist.self, from: data)
+        //                        let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+        //                        print("trying to print user playlists")
+        //                        print(result)
+                            let resultPlaylist = result
+                            completion(.success(resultPlaylist))
+                        }
+                        catch {
+                                completion(.failure(error))
+                        }
+                    }
+                    task.resume()
+                }
+
+            case .failure(_):
+                print("failed")
+            }
+        }
+    }
+    
+    
+    // gets playlist tracks
+    @MainActor public func getPlaylistTracks(with playlist: Playlist, completion: @escaping (Result<[Track], Error>) -> Void) {
+            createRequest(
+                with: URL(string: playlist.tracks.href),
+                type: .GET)
+            { baseRequest in
+                let task = URLSession.shared.dataTask(with: baseRequest) { data,
+                    _,
+                    error in
+                    guard let data = data, error == nil else {
+                        completion(.failure(APIError.failedToGetData))
+                        return
+                    }
+
+                    do {
+                        let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                        print(result)
+//                        let result = try JSONDecoder().decode(Playlists.self, from: data)
+//                        let resultPlaylists = result.items
+//                        completion(.success(resultPlaylists))
+                    }
+                    catch {
+                        completion(.failure(error))
+                    }
+                }
+                task.resume()
+            }
     }
 
     // adds track to playlist
@@ -100,6 +168,7 @@ final class APICaller: ObservableObject {
     
     @MainActor private func createRequest( with url: URL?, type: HTTPMethod, completion: @escaping (URLRequest) -> Void) {
         self.authManager.withValidToken { token in
+            print("token: \(token)")
             guard let apiURL = url else {
                 return
             }

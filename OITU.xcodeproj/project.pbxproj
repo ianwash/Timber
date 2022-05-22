@@ -18,12 +18,14 @@
 		D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC972833252500CDD5D5 /* LibraryView.swift */; };
 		D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9B283328C600CDD5D5 /* APICaller.swift */; };
 		D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9D283328F300CDD5D5 /* APIImage.swift */; };
-		D2C5ACA02833290200CDD5D5 /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */; };
 		D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA12833291100CDD5D5 /* Playlist.swift */; };
 		D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA32833292200CDD5D5 /* Playlists.swift */; };
 		D2C5ACA62833292E00CDD5D5 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */; };
 		D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */; };
 		D2C5ACAC283886EE00CDD5D5 /* PlaylistMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */; };
+		D2C5ACB12839977800CDD5D5 /* InAppPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACB02839977800CDD5D5 /* InAppPlayView.swift */; };
+		D2C5ACB32839E72300CDD5D5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACB22839E72300CDD5D5 /* Track.swift */; };
+		D2C5ACB52839F9A600CDD5D5 /* PlaylistTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5ACB42839F9A600CDD5D5 /* PlaylistTrack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +41,14 @@
 		D2C5AC972833252500CDD5D5 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		D2C5AC9B283328C600CDD5D5 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		D2C5AC9D283328F300CDD5D5 /* APIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImage.swift; sourceTree = "<group>"; };
-		D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
 		D2C5ACA12833291100CDD5D5 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		D2C5ACA32833292200CDD5D5 /* Playlists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlists.swift; sourceTree = "<group>"; };
 		D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCard.swift; sourceTree = "<group>"; };
 		D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistMenu.swift; sourceTree = "<group>"; };
+		D2C5ACB02839977800CDD5D5 /* InAppPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPlayView.swift; sourceTree = "<group>"; };
+		D2C5ACB22839E72300CDD5D5 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		D2C5ACB42839F9A600CDD5D5 /* PlaylistTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTrack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +103,9 @@
 		D2C5AC8C28331CC600CDD5D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */,
-				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
-				D2C5AC972833252500CDD5D5 /* LibraryView.swift */,
-				D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */,
-				D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */,
+				D2C5ACAF2839969700CDD5D5 /* Screens */,
+				D2C5ACAE2839967F00CDD5D5 /* Sheets */,
+				D2C5ACAD2839965E00CDD5D5 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,10 +115,11 @@
 			children = (
 				D2C5AC9328331E8D00CDD5D5 /* AuthResponse.swift */,
 				D2C5AC9D283328F300CDD5D5 /* APIImage.swift */,
-				D2C5AC9F2833290200CDD5D5 /* AudioTrack.swift */,
 				D2C5ACA12833291100CDD5D5 /* Playlist.swift */,
 				D2C5ACA32833292200CDD5D5 /* Playlists.swift */,
 				D2C5ACA52833292E00CDD5D5 /* UserProfile.swift */,
+				D2C5ACB22839E72300CDD5D5 /* Track.swift */,
+				D2C5ACB42839F9A600CDD5D5 /* PlaylistTrack.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -128,6 +131,33 @@
 				D2C5AC9B283328C600CDD5D5 /* APICaller.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		D2C5ACAD2839965E00CDD5D5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5ACA72835DFDD00CDD5D5 /* PlaylistCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D2C5ACAE2839967F00CDD5D5 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
+				D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		D2C5ACAF2839969700CDD5D5 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5AC8D28331D4B00CDD5D5 /* LoginView.swift */,
+				D2C5AC972833252500CDD5D5 /* LibraryView.swift */,
+				D2C5ACB02839977800CDD5D5 /* InAppPlayView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,10 +237,12 @@
 				D2C5AC962833247B00CDD5D5 /* User.swift in Sources */,
 				D2C5AC8E28331D4B00CDD5D5 /* LoginView.swift in Sources */,
 				D2C5AC9428331E8D00CDD5D5 /* AuthResponse.swift in Sources */,
-				D2C5ACA02833290200CDD5D5 /* AudioTrack.swift in Sources */,
+				D2C5ACB12839977800CDD5D5 /* InAppPlayView.swift in Sources */,
+				D2C5ACB52839F9A600CDD5D5 /* PlaylistTrack.swift in Sources */,
 				D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */,
 				D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */,
 				D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */,
+				D2C5ACB32839E72300CDD5D5 /* Track.swift in Sources */,
 				D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */,
 				D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */,
 				D2C5ACA42833292200CDD5D5 /* Playlists.swift in Sources */,

@@ -23,15 +23,9 @@ struct LibraryView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: twoColumnGrid, spacing: 8) {
                                 ForEach(filteredPlaylists, id: \.id) { playlist in
-//                                    Button(action: {
-//                                        print(playlist.name)
-//                                    }) {
-//                                        PlaylistCard(playlist: playlist)
-//                                    }
-                                    
-                                    
                                     Button(action: {
                                         apiCaller.authManager.user?.sourcePlaylist = playlist
+                                        test()
                                         menuSheet.toggle()
                                         }, label: {
                                             PlaylistCard(playlist: playlist)
@@ -83,17 +77,32 @@ struct LibraryView: View {
     
     func loadData() {
         apiCaller.getCurrentUserPlaylists {result in
-                       DispatchQueue.main.async {
-                           switch result {
-                           case .success(let model):
-                               self.playlists = model
-                               print(playlists)
-                           case .failure(let error):
-                               print(error.localizedDescription)
-                           }
-                       }
-                   }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let model):
+                    self.playlists = model
+                    print(playlists)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         }
+    }
+    
+    func test() {
+        apiCaller.getPlaylistTracks(with: apiCaller.authManager.user!.sourcePlaylist) {result in
+            DispatchQueue.main.async {
+                print("i tried")
+//                switch result {
+//                case .success(let model):
+//                    self.playlists = model
+//                    print(playlists)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+            }
+        }
+    }
 }
 
 
