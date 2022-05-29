@@ -8,12 +8,16 @@
 import Foundation
 
 struct Track: Codable {
-    let name: String
-    let uri: String
     let track: TrackInfo
 }
 
 struct TrackInfo: Codable {
+    let album: AlbumInfo
+    let name: String
+    let uri: String
+}
+
+struct AlbumInfo: Codable {
     let images: [APIImage]
 }
 
@@ -35,20 +39,9 @@ struct TrackInfo: Codable {
 //                "album": {
 //                    "album_type": "single",
 //                    "artists": [
-//                        {
-//                            "external_urls": {
-//                                "spotify": "https://open.spotify.com/artist/4SqTiwOEdYrNayaGMkc7ia"
-//                            },
-//                            "href": "https://api.spotify.com/v1/artists/4SqTiwOEdYrNayaGMkc7ia",
-//                            "id": "4SqTiwOEdYrNayaGMkc7ia",
-//                            "name": "LÉON",
-//                            "type": "artist",
-//                            "uri": "spotify:artist:4SqTiwOEdYrNayaGMkc7ia"
-//                        }
 //                    ],
 //                    "available_markets": [
 //                        "AD",
-//
 //                    ],
 //                    "external_urls": {
 //                        "spotify": "https://open.spotify.com/album/632AmGXsZTyDa52gsJlDVF"

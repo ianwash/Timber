@@ -28,7 +28,7 @@ final class AuthManager: ObservableObject {
     }
 
     public var signInURL: URL? {
-        let scopes = "user-read-private%20playlist-modify-public%20playlist-modify-private%20playlist-read-private"
+        let scopes = "user-read-private%20playlist-modify-public%20playlist-modify-private%20playlist-read-private%20user-read-playback-state%20user-modify-playback-state"
         let redirectURI = "https://www.spotify.com/us/"
         let base = "https://accounts.spotify.com/authorize"
         let string = "\(base)?response_type=code&client_id=\(Constants.clientID)&scope=\(scopes)&redirect_uri=\(redirectURI)&show_dialog=TRUE"

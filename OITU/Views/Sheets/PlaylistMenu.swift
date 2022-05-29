@@ -13,6 +13,7 @@ struct PlaylistMenu: View {
         }
     
     @EnvironmentObject var apiCaller: APICaller
+    @EnvironmentObject var user: User
     @State var useTemplate = false
     @State private var newName = ""
     @State private var moveOn = false
@@ -22,12 +23,12 @@ struct PlaylistMenu: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            if apiCaller.authManager.user?.sourcePlaylist.images.count == 0 {
+            if user.sourcePlaylist.images.count == 0 {
                 EmptyView()
             }
             
             else {
-                AsyncImage(url: URL(string: apiCaller.authManager.user?.sourcePlaylist.images[0].url ?? "")) { phase in
+                AsyncImage(url: URL(string: user.sourcePlaylist.images[0].url)) { phase in
                     switch phase {
                     case .success(let image):
                         image
@@ -59,7 +60,6 @@ struct PlaylistMenu: View {
                         TextEditor(text: $newName)
                             .onChange(of: newName) { _ in
                                         if !newName.filter({ $0.isNewline }).isEmpty {
-                                            // TO DO
                                             create()
                                         }
                                     }
@@ -70,7 +70,9 @@ struct PlaylistMenu: View {
                                     )
                                 }
                             .fullScreenCover(isPresented: $moveOn) {
-                                InAppPlayView()
+                                withAnimation {
+                                    InAppPlayView()
+                                }
                             }
                             .foregroundColor(Color.green)
                             .font(.system(size: 18))
@@ -86,7 +88,6 @@ struct PlaylistMenu: View {
                     .padding([.bottom], 30)
                     
                     Button(action: {
-    //                    TO DO
                         create()
                         }, label: {
                             HStack {
@@ -102,26 +103,28 @@ struct PlaylistMenu: View {
                                             .stroke(Color.white, lineWidth: 1)
                                     )
                             .fullScreenCover(isPresented: $moveOn) {
-                                InAppPlayView()
+                                withAnimation {
+                                    InAppPlayView()
+                                }
                             }
                         })
                 }
                 .frame(width: dimension)
                 .onAppear {
-                    newName = (apiCaller.authManager.user?.sourcePlaylist.name ?? "") + " (Timber's Version)"
+                    newName = (user.sourcePlaylist.name) + " (Timber's Version)"
                 }
             }
             
             else {
                 VStack {
-                    if apiCaller.authManager.user?.sourcePlaylist.images.count == 0 {
+                    if user.sourcePlaylist.images.count == 0 {
                         Image(systemName: "x.square")
                             .aspectRatio(contentMode: .fill)
                             .frame(width: dimension, height: dimension)
                     }
                     
                     else {
-                        AsyncImage(url: URL(string: apiCaller.authManager.user?.sourcePlaylist.images[0].url ?? ""), scale: 4.0) { phase in
+                        AsyncImage(url: URL(string: user.sourcePlaylist.images[0].url), scale: 4.0) { phase in
                             switch phase {
                             case .success(let image):
                                 image
@@ -149,7 +152,7 @@ struct PlaylistMenu: View {
                     }
                     
                     HStack {
-                        Text(apiCaller.authManager.user?.sourcePlaylist.name ?? "")
+                        Text(user.sourcePlaylist.name)
                             .foregroundColor(Color.white)
                             .font(.system(size: 20))
                             .fontWeight(.bold)
@@ -158,28 +161,32 @@ struct PlaylistMenu: View {
                         .frame(width: dimension, height: 50)
                         .padding(.bottom)
                     
-                    Button(action: {
-                        // set the destination playlist
-                        apiCaller.authManager.user?.destinationPlaylist = apiCaller.authManager.user?.sourcePlaylist ?? Playlist(id: "", images: [], name: "", tracks: Tracks(href: ""))
-                        // move on to nect page
-                        moveOn = true
-                        }, label: {
-                            HStack {
-                                Image(systemName: "square.and.pencil")
-                                    .foregroundColor(Color.green)
-                                    .font(.system(size: 20))
-                                Text("Edit directly")
-                                    .padding()
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(8)
-                                    .font(.system(size: 18))
-                                Spacer()
+                    if user.sourcePlaylist.owner.id == user.userId {
+                        Button(action: {
+                            // set the destination playlist
+                            user.destinationPlaylist = user.sourcePlaylist
+                            // move on to nect page
+                            moveOn = true
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "square.and.pencil")
+                                        .foregroundColor(Color.green)
+                                        .font(.system(size: 20))
+                                    Text("Edit directly")
+                                        .padding()
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(8)
+                                        .font(.system(size: 18))
+                                    Spacer()
+                                }
+                                .frame(width: dimension, height: 40)
+                            })
+                            .fullScreenCover(isPresented: $moveOn) {
+                                withAnimation {
+                                    InAppPlayView()
+                                }
                             }
-                            .frame(width: dimension, height: 40)
-                        })
-                        .fullScreenCover(isPresented: $moveOn) {
-                            InAppPlayView()
-                        }
+                    }
                     
                     Button(action: {
                         withAnimation {
@@ -208,18 +215,19 @@ struct PlaylistMenu: View {
     
     func create() {
         apiCaller.createPlaylist(with: newName) {result in
-                       DispatchQueue.main.async {
-                           switch result {
-                           case .success(let model):
-                               apiCaller.authManager.user?.destinationPlaylist = model
-                               print(apiCaller.authManager.user?.destinationPlaylist ?? "none found")
-                               moveOn = true
-                           case .failure(let error):
-                               print(error.localizedDescription)
-                               showingAlert = true
-                           }
-                       }
-                   }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let model):
+                    // set the destination playlist 
+                    user.destinationPlaylist = model
+                    print(user.destinationPlaylist)
+                    moveOn = true
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    showingAlert = true
+                }
+            }
+        }
     }
 }
 

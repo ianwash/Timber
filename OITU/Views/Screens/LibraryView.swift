@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LibraryView: View {
     @EnvironmentObject var apiCaller: APICaller
+    @EnvironmentObject var user: User
     @State var playlists = [Playlist]()
     @State var searchText = ""
     @State var filteredPlaylists = [Playlist]()
@@ -24,8 +25,9 @@ struct LibraryView: View {
                             LazyVGrid(columns: twoColumnGrid, spacing: 8) {
                                 ForEach(filteredPlaylists, id: \.id) { playlist in
                                     Button(action: {
-                                        apiCaller.authManager.user?.sourcePlaylist = playlist
-                                        test()
+                                        // set the source playlist
+                                        user.sourcePlaylist = playlist
+//                                        test()
                                         menuSheet.toggle()
                                         }, label: {
                                             PlaylistCard(playlist: playlist)
@@ -73,6 +75,7 @@ struct LibraryView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .onAppear(perform: setUser)
     }
     
     func loadData() {
@@ -89,17 +92,15 @@ struct LibraryView: View {
         }
     }
     
-    func test() {
-        apiCaller.getPlaylistTracks(with: apiCaller.authManager.user!.sourcePlaylist) {result in
+    func setUser() {
+        apiCaller.getCurrentUserProfile {result in
             DispatchQueue.main.async {
-                print("i tried")
-//                switch result {
-//                case .success(let model):
-//                    self.playlists = model
-//                    print(playlists)
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
+                switch result {
+                case .success(let model):
+                    user.userId = model.id
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }

@@ -11,3 +11,4 @@ struct Playlists: Codable {
     let items: [Playlist]
     let total: Int
 }
+

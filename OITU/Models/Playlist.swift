@@ -12,8 +12,13 @@ struct Playlist: Codable, Equatable {
     let images: [APIImage]
     let name: String
     let tracks: Tracks
+    let owner: Owner
 }
 
 struct Tracks: Codable, Equatable {
     let href: String
+}
+
+struct Owner: Codable, Equatable {
+    let id: String
 }

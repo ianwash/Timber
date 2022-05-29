@@ -54,16 +54,27 @@ struct PlaylistCard: View {
                 }
             }
             
-            HStack {
-                Text("\(playlist.name)")
-                    .lineLimit(1)
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 15))
-                Spacer()
-                Text("\n")
+            VStack {
+                HStack {
+                    Text("\(playlist.name)")
+                        .lineLimit(1)
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 15))
+                    Spacer()
+//                    Text("\n")
+                }
+                HStack {
+                    Text("\(playlist.owner.id)")
+                        .lineLimit(1)
+                        .foregroundColor(Color.green)
+                        .font(.system(size: 15))
+                    Spacer()
+//                    Text("\n")
+                }
             }
             .background(Color.black)
             .frame(width: dimension)
+            .padding([.top], 8)
         }
         .clipped()
         .padding(10)
