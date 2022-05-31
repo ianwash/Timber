@@ -7,18 +7,24 @@
 
 import Foundation
 
-struct Track: Codable {
+struct Track: Codable, Equatable {
     let track: TrackInfo
 }
 
-struct TrackInfo: Codable {
+struct TrackInfo: Codable, Equatable {
     let album: AlbumInfo
     let name: String
     let uri: String
+    let artists: [Artist]
 }
 
-struct AlbumInfo: Codable {
+struct AlbumInfo: Codable, Equatable {
     let images: [APIImage]
+}
+
+struct Artist: Codable, Equatable {
+    let name: String
+    let id: String
 }
 
 

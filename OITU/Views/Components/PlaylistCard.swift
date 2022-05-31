@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct PlaylistCard: View {
     var playlist: Playlist
@@ -17,6 +18,7 @@ struct PlaylistCard: View {
                 Image(systemName: "x.square")
                     .aspectRatio(contentMode: .fill)
                     .frame(width: dimension, height: dimension)
+                    .clipped()
                     .foregroundColor(Color.white)
             }
             else {
@@ -27,6 +29,7 @@ struct PlaylistCard: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: dimension, height: dimension)
+                            .clipped()
                     case .empty:
                         ProgressView()
                             .aspectRatio(contentMode: .fill)
@@ -38,10 +41,12 @@ struct PlaylistCard: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: dimension, height: dimension)
+                                    .clipped()
                             } else {
                                 Image(systemName: "x.square")
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: dimension, height: dimension)
+                                    .clipped()
                                     .foregroundColor(Color.white)
                             }
                         }
@@ -49,6 +54,7 @@ struct PlaylistCard: View {
                         Image(systemName: "x.square")
                             .aspectRatio(contentMode: .fill)
                             .frame(width: dimension, height: dimension)
+                            .clipped()
                             .foregroundColor(Color.white)
                     }
                 }
@@ -66,8 +72,9 @@ struct PlaylistCard: View {
                 HStack {
                     Text("\(playlist.owner.id)")
                         .lineLimit(1)
-                        .foregroundColor(Color.green)
-                        .font(.system(size: 15))
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 13))
+                        .opacity(0.7)
                     Spacer()
 //                    Text("\n")
                 }

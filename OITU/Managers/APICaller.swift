@@ -222,7 +222,7 @@ final class APICaller: ObservableObject {
     }
     
     // gets the current devices to play from
-    @MainActor public func getAvailablePlayers(completion: @escaping (Result<[Device], Error>) -> Void) {
+    @MainActor public func getAvailablePlayers(completion: @escaping (Result<Device?, Error>) -> Void) {
             createRequest(
                 with: URL(string: Constants.baseAPIURL + "/me/player/devices"),
                 type: .GET)
@@ -237,9 +237,8 @@ final class APICaller: ObservableObject {
 
                     do {
                         let result = try JSONDecoder().decode(PlaybackDevices.self, from: data)
-                        print("here is the result: \(result)")
-                        let resultDevices = result.devices
-                        completion(.success(resultDevices))
+                        let resultDevices = result.devices.filter {$0.is_active}
+                        completion(.success(resultDevices.first))
                     }
                     catch {
                         completion(.failure(error))

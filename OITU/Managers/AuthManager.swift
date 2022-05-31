@@ -9,24 +9,24 @@ import Foundation
 
 @MainActor
 final class AuthManager: ObservableObject {
-
+    
     private var refreshingToken = false
     
     @Published var user: User?
-
+    
     struct Constants {
         static let clientID = ""
         static let clientSecret = ""
         static let tokenAPIURL = "https://accounts.spotify.com/api/token"
     }
-
+    
     init() {
-//      handle if the stored token is expired, show loading state eventually
+        //      handle if the stored token is expired, show loading state eventually
         if let accessToken = accessToken, let refreshToken = refreshToken, let tokenExpirationDate = tokenExpirationDate {
             user = User()
         }
     }
-
+    
     public var signInURL: URL? {
         let scopes = "user-read-private%20playlist-modify-public%20playlist-modify-private%20playlist-read-private%20user-read-playback-state%20user-modify-playback-state"
         let redirectURI = "https://www.spotify.com/us/"
@@ -34,11 +34,11 @@ final class AuthManager: ObservableObject {
         let string = "\(base)?response_type=code&client_id=\(Constants.clientID)&scope=\(scopes)&redirect_uri=\(redirectURI)&show_dialog=TRUE"
         return URL(string: string)
     }
-
+    
     var isSignedIn: Bool {
         return accessToken != nil
     }
-
+    
     private var accessToken: String? {
         get{
             return UserDefaults.standard.string(forKey: "access_token")
@@ -47,7 +47,7 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: "access_token")
         }
     }
-
+    
     private var refreshToken: String? {
         get {
             return UserDefaults.standard.string(forKey: "refresh_token")
@@ -56,7 +56,7 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: "refresh_token")
         }
     }
-
+    
     private var tokenExpirationDate: Date? {
         get {
             return UserDefaults.standard.object(forKey: "expirationDate") as? Date
@@ -65,7 +65,7 @@ final class AuthManager: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: "expirationDate")
         }
     }
-
+    
     private var shouldRefreshToken: Bool {
         guard let expirationDate = tokenExpirationDate else {
             return false
@@ -75,29 +75,29 @@ final class AuthManager: ObservableObject {
         // checks to see if there is less than five minutes left on token
         return currentDate.addingTimeInterval(fiveMinutes) >= expirationDate
     }
-
+    
     public func exchangeCodeForToken(
         code: String
     ) async throws {
         guard let url = URL(string: Constants.tokenAPIURL) else {
             return
         }
-
+        
         var components = URLComponents()
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "authorization_code"),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "redirect_uri", value: "https://www.spotify.com/us/")
         ]
-
+        
         var request = URLRequest(url: url)
-
+        
         request.httpMethod = "POST"
-
+        
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
+        
         request.httpBody = components.query?.data(using: .utf8)
-
+        
         let basicToken = Constants.clientID + ":" + Constants.clientSecret
         // convert to data
         let dataFromToken = basicToken.data(using: .utf8)
@@ -107,7 +107,7 @@ final class AuthManager: ObservableObject {
             print("Failure to get the base 64")
             return
         }
-
+        
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         
         let (data, _) = try await URLSession.shared.data(for: request, delegate: nil)
@@ -115,7 +115,7 @@ final class AuthManager: ObservableObject {
         cacheToken(result: result)
         user = User()
     }
-
+    
     public func cacheToken(result: AuthResponse){
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
         if let refresh_token = result.refresh_token {
@@ -124,9 +124,9 @@ final class AuthManager: ObservableObject {
         // calculates the date in which the token is no longer valid
         UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expires_in)), forKey: "expirationDate")
     }
-
+    
     private var onRefreshBlocks = [((String) -> Void)]()
-
+    
     // gives us the access token to be used with API calls
     public func withValidToken(completion: @escaping (String) -> Void) {
         guard !refreshingToken else {
@@ -146,42 +146,42 @@ final class AuthManager: ObservableObject {
             completion(token)
         }
     }
-
+    
     public func refreshIfNeeded(completion: @escaping (Bool) -> Void){
         // makes sure we aren't already refreshing
         guard !refreshingToken else {
             return
         }
-
+        
         guard shouldRefreshToken else {
             completion(true)
             return
         }
-
+        
         guard let refreshToken = self.refreshToken else {
             return
         }
-
+        
         guard let url = URL(string: Constants.tokenAPIURL) else {
             return
         }
-
+        
         refreshingToken = true
-
+        
         var components = URLComponents()
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "refresh_token"),
             URLQueryItem(name: "refresh_token", value: refreshToken)
         ]
-
+        
         var request = URLRequest(url: url)
-
+        
         request.httpMethod = "POST"
-
+        
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
+        
         request.httpBody = components.query?.data(using: .utf8)
-
+        
         let basicToken = Constants.clientID + ":" + Constants.clientSecret
         // convert to data
         let data = basicToken.data(using: .utf8)
@@ -192,17 +192,17 @@ final class AuthManager: ObservableObject {
             print("Failure to get the base 64")
             return
         }
-
+        
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
-
+        
         let task = URLSession.shared.dataTask(with: request) {[weak self] data, _, error in
             self?.refreshingToken = false
             // handles if something goes wrong
             guard let data = data,
-                    error == nil else {
-                completion(false)
-                return
-            }
+                  error == nil else {
+                      completion(false)
+                      return
+                  }
             do {
                 // decode the response
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
@@ -218,6 +218,6 @@ final class AuthManager: ObservableObject {
         }
         // starts off API call
         task.resume()
-
+        
     }
 }

@@ -12,7 +12,7 @@ struct InAppPlayView: View {
     @EnvironmentObject var apiCaller: APICaller
     @EnvironmentObject var user: User
     @State private var showInfo = false
-    @State var devices = [Device]()
+    @State private var device: Device?
     @State private var moveOn = false
     var oneColumnGrid = [GridItem(.flexible())]
     let dimension = UIScreen.main.bounds.width - 80
@@ -55,26 +55,28 @@ struct InAppPlayView: View {
                     .padding([.bottom], 15)
                 
                 Group {
-                    ForEach(devices, id: \.id) {device in
-                        if device.is_active {
-                            Button(action: {
-                                user.playbackDevice = device
-                                moveOn = true
-                                }, label: {
-                                    HStack {
-                                        Text(device.name)
-                                            .foregroundColor(Color.white)
-                                            .font(.system(size: 18))
-                                        Spacer()
-                                    }
-                                })
-                                .padding(10)
-                                .fullScreenCover(isPresented: $moveOn) {
-                                    withAnimation {
-                                        SwiperView()
-                                    }
+                    if let device = device {
+                        Button(action: {
+                            user.playbackDevice = device
+                            moveOn = true
+                            }, label: {
+                                HStack {
+                                    Text(device.name)
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 18))
+                                    Spacer()
                                 }
-                        }
+                            })
+                            .padding(10)
+                            .fullScreenCover(isPresented: $moveOn) {
+                                withAnimation {
+                                    SwiperView()
+                                }
+                            }
+                    }
+                    
+                    else {
+                        Spacer()
                     }
                 }
                     .frame(width: dimension, height: 50)
@@ -104,7 +106,8 @@ struct InAppPlayView: View {
                         })
                     
                     Button(action: {
-    //                    handle submission
+                        user.playbackDevice = Device(id: "", is_active: false, is_restricted: true, name: "", type: "")
+                        moveOn = true
                         }, label: {
                             HStack {
                                 Text("Skip")
@@ -119,6 +122,11 @@ struct InAppPlayView: View {
 //                                            .stroke(Color.white, lineWidth: 1)
 //                                    )
                         })
+                        .fullScreenCover(isPresented: $moveOn) {
+                            withAnimation {
+                                SwiperView()
+                            }
+                        }
                 }
                 
                 HStack {
@@ -162,8 +170,7 @@ struct InAppPlayView: View {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
-                    devices = model
-                    print(model)
+                    device = model
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
