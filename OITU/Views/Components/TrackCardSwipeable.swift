@@ -15,7 +15,7 @@ struct TrackCardSwipeable: View {
     var track: Track
     private var onRemove: (_ track: Track) -> Void
     let dimensionX = UIScreen.main.bounds.width - 60
-    let dimensionY = UIScreen.main.bounds.height - 375
+    let dimensionY = UIScreen.main.bounds.height - 300
     
     init(track: Track, onRemove: @escaping (_ track: Track) -> Void) {
             self.track = track
@@ -33,7 +33,7 @@ struct TrackCardSwipeable: View {
                 Image(systemName: "x.square")
                     .aspectRatio(contentMode: .fill)
                     .blur(radius: 50)
-                    .opacity(0.8)
+                    .opacity(0.6)
             }
             
             else {
@@ -45,7 +45,7 @@ struct TrackCardSwipeable: View {
                             .aspectRatio(contentMode: .fill)
                             .clipped()
                             .blur(radius: 50)
-                            .opacity(0.8)
+                            .opacity(0.6)
                     case .empty:
                         ProgressView()
                             .aspectRatio(contentMode: .fill)
@@ -55,13 +55,13 @@ struct TrackCardSwipeable: View {
                             .aspectRatio(contentMode: .fill)
                             .clipped()
                             .blur(radius: 50)
-                            .opacity(0.8)
+                            .opacity(0.6)
                     @unknown default:
                         Image(systemName: "x.square")
                             .aspectRatio(contentMode: .fill)
                             .clipped()
                             .blur(radius: 50)
-                            .opacity(0.8)
+                            .opacity(0.6)
                     }
                 }
             }

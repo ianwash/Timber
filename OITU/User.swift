@@ -14,8 +14,8 @@ class User: ObservableObject {
     var playbackDevice: Device
     
     init() {
-        self.sourcePlaylist = Playlist(id: "", images: [APIImage(url: "")], name: "", tracks: Tracks(href: ""), owner: Owner(id: ""))
-        self.destinationPlaylist = Playlist(id: "", images: [], name: "", tracks: Tracks(href: ""), owner: Owner(id: ""))
+        self.sourcePlaylist = Playlist(id: "", images: [APIImage(url: "")], name: "", tracks: Tracks(href: ""), owner: Owner(id: ""), uri: "")
+        self.destinationPlaylist = Playlist(id: "", images: [], name: "", tracks: Tracks(href: ""), owner: Owner(id: ""), uri: "")
         self.userId = ""
         self.playbackDevice = Device(id: "", is_active: false, is_restricted: true, name: "", type: "")
     }

@@ -13,6 +13,7 @@ struct Playlist: Codable, Equatable {
     let name: String
     let tracks: Tracks
     let owner: Owner
+    let uri: String
 }
 
 struct Tracks: Codable, Equatable {

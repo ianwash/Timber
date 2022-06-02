@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2250BA12847E1B300432583 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2250BA02847E1B300432583 /* PlaybackState.swift */; };
 		D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */; };
 		D2C5AC812832AAA100CDD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */; };
 		D2C5AC842832AAA100CDD5D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC832832AAA100CDD5D5 /* Preview Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2250BA02847E1B300432583 /* PlaybackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackState.swift; sourceTree = "<group>"; };
 		D2C5AC792832AA9F00CDD5D5 /* Timber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OITUApp.swift; sourceTree = "<group>"; };
 		D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				D2C5ACB22839E72300CDD5D5 /* Track.swift */,
 				D2C5ACB42839F9A600CDD5D5 /* PlaylistTrack.swift */,
 				D2C5ACB6283C3A1200CDD5D5 /* PlaybackDevices.swift */,
+				D2250BA02847E1B300432583 /* PlaybackState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				D2C5ACAC283886EE00CDD5D5 /* PlaylistMenu.swift in Sources */,
 				D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */,
 				D2C5AC9028331D7B00CDD5D5 /* AuthView.swift in Sources */,
+				D2250BA12847E1B300432583 /* PlaybackState.swift in Sources */,
 				D2C5AC8B28331B8800CDD5D5 /* AuthManager.swift in Sources */,
 				D2C5AC962833247B00CDD5D5 /* User.swift in Sources */,
 				D2C5AC8E28331D4B00CDD5D5 /* LoginView.swift in Sources */,

@@ -165,7 +165,7 @@ struct PlaylistMenu: View {
                         Button(action: {
                             // set the destination playlist
                             user.destinationPlaylist = user.sourcePlaylist
-                            // move on to nect page
+                            // move on to next page
                             moveOn = true
                             }, label: {
                                 HStack {

@@ -59,15 +59,14 @@ struct InAppPlayView: View {
                         Button(action: {
                             user.playbackDevice = device
                             moveOn = true
+                            print("device id: \(user.playbackDevice.id)")
                             }, label: {
                                 HStack {
                                     Text(device.name)
-                                        .foregroundColor(Color.white)
+                                        .foregroundColor(Color.green)
                                         .font(.system(size: 18))
-                                    Spacer()
                                 }
                             })
-                            .padding(10)
                             .fullScreenCover(isPresented: $moveOn) {
                                 withAnimation {
                                     SwiperView()
@@ -76,7 +75,10 @@ struct InAppPlayView: View {
                     }
                     
                     else {
-                        Spacer()
+                        Text("No devices found")
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 18))
+                            .opacity(0.5)
                     }
                 }
                     .frame(width: dimension, height: 50)
