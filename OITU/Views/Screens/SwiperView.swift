@@ -50,7 +50,7 @@ struct SwiperView: View {
                             )
                             .fullScreenCover(isPresented: $backHome) {
                                 withAnimation {
-                                    LibraryView()
+                                    LibraryView(step: LibrarySteps.userSource)
                                 }
                             }
                     }
@@ -72,7 +72,7 @@ struct SwiperView: View {
                                 }
                                 else {
                                     currentURI = tracks.last?.track.uri
-                                    queue()
+                                    play()
                                 }
                                 // update current URI for playback
     //                                self.tracks.removeAll {$0 == removedTrack}
@@ -80,8 +80,6 @@ struct SwiperView: View {
                         }
                     }
                 }
-                
-                // if the stack is empty, show success and button to go back home
                 
                 // rwd, play/pause, ffwd
                 if user.playbackDevice.id != "" {
@@ -144,78 +142,24 @@ struct SwiperView: View {
                 case .success(let model):
                     tracks = model.reversed()
                     currentURI = tracks.last?.track.uri
-                    queue()
+                    play()
                 case .failure(let error):
                     print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    //play the current song
-    func playCurrentSong() {
-        skip()
-    }
-    
-    func skip() {
-        apiCaller.skipToNext(with: user.playbackDevice) {result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success( _):
-                    // to do
-                    print("skipped track")
-                    // check to see if it is what we want
-                    songCheck()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func songCheck() {
-        apiCaller.getPlaybackState { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let model):
-                    isPlaying = model.is_playing
-                    if model.item.uri != currentURI && !tracks.isEmpty {
-                        print("model uri: \(model.item.uri)")
-                        print("current uri: \(String(describing: currentURI))")
-                        skip()
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func queue() {
-        if let currentURI = currentURI {
-            apiCaller.addToQueue(with: user.playbackDevice, with: currentURI) {result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success( _):
-                        // to do
-                        print("added to queue")
-                        skip()
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
                 }
             }
         }
     }
     
     func play() {
-        apiCaller.playSong(with: user.playbackDevice) {result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success( _):
-                    isPlaying = true
-                case .failure(let error):
-                    print(error.localizedDescription)
+        if let currentURI = currentURI {
+            apiCaller.playSong(with: user.playbackDevice, with: currentURI) {result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success( _):
+                        isPlaying = true
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D2250BA12847E1B300432583 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2250BA02847E1B300432583 /* PlaybackState.swift */; };
+		D2250BA9284B275B00432583 /* SearchSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2250BA8284B275B00432583 /* SearchSheet.swift */; };
+		D2250BAD284D556C00432583 /* NewPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2250BAC284D556C00432583 /* NewPlaylist.swift */; };
 		D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */; };
 		D2C5AC812832AAA100CDD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */; };
 		D2C5AC842832AAA100CDD5D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C5AC832832AAA100CDD5D5 /* Preview Assets.xcassets */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		D2250BA02847E1B300432583 /* PlaybackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackState.swift; sourceTree = "<group>"; };
+		D2250BA8284B275B00432583 /* SearchSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSheet.swift; sourceTree = "<group>"; };
+		D2250BAC284D556C00432583 /* NewPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylist.swift; sourceTree = "<group>"; };
 		D2C5AC792832AA9F00CDD5D5 /* Timber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C5AC7C2832AA9F00CDD5D5 /* OITUApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OITUApp.swift; sourceTree = "<group>"; };
 		D2C5AC802832AAA100CDD5D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 			children = (
 				D2C5AC8F28331D7B00CDD5D5 /* AuthView.swift */,
 				D2C5ACAB283886EE00CDD5D5 /* PlaylistMenu.swift */,
+				D2250BA8284B275B00432583 /* SearchSheet.swift */,
+				D2250BAC284D556C00432583 /* NewPlaylist.swift */,
 			);
 			path = Sheets;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2250BAD284D556C00432583 /* NewPlaylist.swift in Sources */,
 				D2C5ACAC283886EE00CDD5D5 /* PlaylistMenu.swift in Sources */,
 				D2C5AC982833252500CDD5D5 /* LibraryView.swift in Sources */,
 				D2C5AC9028331D7B00CDD5D5 /* AuthView.swift in Sources */,
@@ -261,6 +268,7 @@
 				D2C5AC7D2832AA9F00CDD5D5 /* OITUApp.swift in Sources */,
 				D2C5ACA22833291100CDD5D5 /* Playlist.swift in Sources */,
 				D2C5ACA82835DFDD00CDD5D5 /* PlaylistCard.swift in Sources */,
+				D2250BA9284B275B00432583 /* SearchSheet.swift in Sources */,
 				D2C5ACB32839E72300CDD5D5 /* Track.swift in Sources */,
 				D2C5AC9E283328F300CDD5D5 /* APIImage.swift in Sources */,
 				D2C5AC9C283328C600CDD5D5 /* APICaller.swift in Sources */,

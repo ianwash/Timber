@@ -101,10 +101,6 @@ struct InAppPlayView: View {
                                     .font(.system(size: 16))
                             }
                             .frame(width: dimension / 2 - 5, height: 40)
-//                            .overlay(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .stroke(Color.white, lineWidth: 1)
-//                                    )
                         })
                     
                     Button(action: {
@@ -119,10 +115,6 @@ struct InAppPlayView: View {
                                     .font(.system(size: 16))
                             }
                             .frame(width: dimension / 2 - 5, height: 40)
-//                            .overlay(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .stroke(Color.white, lineWidth: 1)
-//                                    )
                         })
                         .fullScreenCover(isPresented: $moveOn) {
                             withAnimation {

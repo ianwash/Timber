@@ -10,11 +10,11 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var apiCaller: APICaller
     // controls whether we show the auth sheet or not
-    @State var showingSheet = false
+    @State private var showingSheet = false
     
     var body: some View {
         if let user = apiCaller.authManager.user {
-            LibraryView()
+            LibraryView(step: .userSource)
                 .environmentObject(user)
         }
         
@@ -47,5 +47,6 @@ struct LoginView: View {
             .preferredColorScheme(.dark)
         }
     }
+    
 }
 

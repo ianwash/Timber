@@ -55,11 +55,39 @@ final class APICaller: ObservableObject {
             task.resume()
         }
     }
+    
+    @MainActor public func getOtherUserProfile(with userID: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        createRequest(
+            with: URL(string: Constants.baseAPIURL + "/users/\(userID)"),
+            type: .GET)
+        { baseRequest in
+            let task = URLSession.shared.dataTask(with: baseRequest) { data,
+                _,
+                error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+
+                do {
+                    let result = try JSONDecoder().decode(UserProfile.self, from: data)
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    print("trying to print other user profile")
+                    print(result)
+                    completion(.success(result))
+                }
+                catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
 
     // gets current user playlists
-    @MainActor public func getCurrentUserPlaylists(completion: @escaping (Result<[Playlist], Error>) -> Void) {
+    @MainActor public func getUserPlaylists(with userID: String, completion: @escaping (Result<[Playlist], Error>) -> Void) {
             createRequest(
-                with: URL(string: Constants.baseAPIURL + "/me/playlists?limit=50"),
+                with: URL(string: Constants.baseAPIURL + "/users/\(userID)/playlists?limit=50"),
                 type: .GET)
             { baseRequest in
                 let task = URLSession.shared.dataTask(with: baseRequest) { data,
@@ -251,12 +279,17 @@ final class APICaller: ObservableObject {
     
     
     // starts the playback on a device
-    @MainActor public func playSong(with device: Device, completion: @escaping (Result<String, Error>) -> Void) {
+    @MainActor public func playSong(with device: Device, with song: String, completion: @escaping (Result<String, Error>) -> Void) {
         createRequest(
             with: URL(string: Constants.baseAPIURL + "/me/player/play?device_id=\(device.id)"),
             type: .PUT)
         { baseRequest in
-            let task = URLSession.shared.dataTask(with: baseRequest) { data,
+            var request = baseRequest
+            let json = [
+                "uris": [song]
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
+            let task = URLSession.shared.dataTask(with: request) { data,
                 _,
                 error in
                 guard let data = data, error == nil else {
@@ -308,45 +341,6 @@ final class APICaller: ObservableObject {
         }
     }
     
-    // add to queue
-    @MainActor public func addToQueue(with device: Device, with uri: String, completion: @escaping (Result<String, Error>) -> Void) {
-        createRequest(
-            with: URL(string: Constants.baseAPIURL + "/me/player/queue?device_id=\(device.id)&uri=\(uri)"),
-            type: .POST)
-        { baseRequest in
-            let task = URLSession.shared.dataTask(with: baseRequest) { data,
-                _,
-                error in
-                guard let data = data, error == nil else {
-                    print("failed to add to queue: \(String(describing: error))")
-                    completion(.failure(APIError.failedToGetData))
-                    return
-                }
-                completion(.success("Done adding."))
-            }
-            task.resume()
-        }
-    }
-    
-    // skip to next
-    @MainActor public func skipToNext(with device: Device, completion: @escaping (Result<String, Error>) -> Void) {
-        createRequest(
-            with: URL(string: Constants.baseAPIURL + "/me/player/next?device_id=\(device.id)"),
-            type: .POST)
-        { baseRequest in
-            let task = URLSession.shared.dataTask(with: baseRequest) { data,
-                _,
-                error in
-                guard let data = data, error == nil else {
-                    print("failed to skip to next: \(String(describing: error))")
-                    completion(.failure(APIError.failedToGetData))
-                    return
-                }
-                completion(.success("Done skipping."))
-            }
-            task.resume()
-        }
-    }
     
     // get playback state
     @MainActor public func getPlaybackState(completion: @escaping (Result<PlaybackState, Error>) -> Void) {
