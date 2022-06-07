@@ -49,6 +49,7 @@ struct PlaylistMenu: View {
                         Image(systemName: "x.square")
                             .aspectRatio(contentMode: .fill)
                             .frame(width: dimension, height: dimension)
+                            .foregroundColor(Color.green)
                     }
                     
                     else {
@@ -69,11 +70,13 @@ struct PlaylistMenu: View {
                                 Image(systemName: "x.square")
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: dimension, height: dimension)
+                                    .foregroundColor(Color.green)
                                     .clipped()
                             @unknown default:
                                 Image(systemName: "x.square")
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: dimension, height: dimension)
+                                    .foregroundColor(Color.green)
                                     .clipped()
                             }
                         }
@@ -84,9 +87,10 @@ struct PlaylistMenu: View {
                             .foregroundColor(Color.white)
                             .font(.system(size: 25))
                             .fontWeight(.bold)
+                            .lineLimit(3)
                         Spacer()
                     }
-                    .frame(width: dimension, height: 50)
+                    .frame(width: dimension)
                     .padding(.bottom)
                     
                     Button(action: {

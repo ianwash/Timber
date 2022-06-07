@@ -77,14 +77,16 @@ struct PlaylistCard: View {
                         Image(systemName: "plus.square")
                     case .edit:
                         Image(systemName: "pencil")
+                    case .logout:
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
                     default:
                         EmptyView()
                     }
                 }
-                .foregroundColor(Color.green)
-                .font(.system(size: 30))
+                .foregroundColor(Color.white)
+                .font(.system(size: 60))
                 .frame(width: dimension, height: dimension)
-                .background(Color.white)
+                .background(Color.green)
                 .clipped()
             }
             Group {
@@ -122,7 +124,7 @@ struct PlaylistCard: View {
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 15))
                                 .padding([.top], 8)
-                                .padding([.leading], 3)
+//                                .padding([.leading], 5)
                             Spacer()
                         }
                         HStack {
@@ -132,12 +134,12 @@ struct PlaylistCard: View {
                                 .font(.system(size: 13))
                                 .opacity(0.7)
                                 .padding([.bottom], 8)
-                                .padding([.leading], 3)
+//                                .padding([.leading], 5)
                             Spacer()
                         }
                     }
                     .onAppear(perform: makeButtonText)
-                    .background(Color.green)
+                    .background(Color.black)
                     .frame(width: dimension)
 //                    .padding([.top], 8)
                 }
@@ -161,6 +163,9 @@ struct PlaylistCard: View {
         case .new:
             text = "Create New Playlist"
             subtext = "love a fresh start"
+        case .logout:
+            text = "Sign out"
+            subtext = "see ya"
         default:
             text = ""
             subtext = ""

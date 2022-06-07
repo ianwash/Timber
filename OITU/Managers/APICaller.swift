@@ -286,8 +286,9 @@ final class APICaller: ObservableObject {
         { baseRequest in
             var request = baseRequest
             let json = [
-                "uris": [song]
-            ]
+                "uris": [song],
+                "position_ms": 30000
+            ] as [String : Any]
             request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request) { data,
                 _,

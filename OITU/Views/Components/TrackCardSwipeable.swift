@@ -34,6 +34,7 @@ struct TrackCardSwipeable: View {
                     .aspectRatio(contentMode: .fill)
                     .blur(radius: 50)
                     .opacity(0.6)
+                    .foregroundColor(Color.green)
             }
             
             else {
@@ -56,12 +57,14 @@ struct TrackCardSwipeable: View {
                             .clipped()
                             .blur(radius: 50)
                             .opacity(0.6)
+                            .foregroundColor(Color.green)
                     @unknown default:
                         Image(systemName: "x.square")
                             .aspectRatio(contentMode: .fill)
                             .clipped()
                             .blur(radius: 50)
                             .opacity(0.6)
+                            .foregroundColor(Color.green)
                     }
                 }
             }
@@ -72,6 +75,7 @@ struct TrackCardSwipeable: View {
                         .frame(width: dimensionX - 50, height: dimensionX - 50)
                         .clipped()
                         .padding([.top, .bottom], 20)
+                        .foregroundColor(Color.green)
                 }
                 
                 else {
@@ -96,12 +100,14 @@ struct TrackCardSwipeable: View {
                                 .frame(width: dimensionX - 50, height: dimensionX - 50)
                                 .clipped()
                                 .padding([.top, .bottom], 20)
+                                .foregroundColor(Color.green)
                         @unknown default:
                             Image(systemName: "x.square")
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: dimensionX - 50, height: dimensionX - 50)
                                 .clipped()
                                 .padding([.top, .bottom], 20)
+                                .foregroundColor(Color.green)
                         }
                     }
                 }

@@ -19,6 +19,7 @@ struct LibraryView: View {
     @State private var goHome = false
     @State private var goPlayer = false
     @State private var newPlaylistSheet = false
+    @State private var signedOut = false
     @State private var selectedPlaylist: Playlist?
     var step: LibrarySteps
     
@@ -28,93 +29,107 @@ struct LibraryView: View {
     var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     
     @State private var text = ""
-
+    
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            Text(text)
+            
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
-                            LazyVGrid(columns: twoColumnGrid, spacing: 8) {
-                                if filteredPlaylists.count == playlists.count {
-                                    switch step {
-                                    // show the search
-                                    case .userSource:
-                                        Button(action: {
-                                            searchSheet.toggle()
-                                            }, label: {
-                                                PlaylistCard(button: NavigationButtons.search)
-                                            })
-                                            .sheet(isPresented: $searchSheet) {
-                                                SearchSheet()
-                                            }
-                                    // show the home
-                                    case .searchSource:
-                                        Button(action: {
-                                            goHome.toggle()
-                                            }, label: {
-                                                PlaylistCard(button: NavigationButtons.home)
-                                            })
-                                            .fullScreenCover(isPresented: $goHome) {
-                                                withAnimation {
-                                                    LibraryView(step: LibrarySteps.userSource)
-                                                }
-                                            }
-                                    case .destination:
-                                        Button(action: {
-                                            // new playlist
-                                            newPlaylistSheet.toggle()
-                                            }, label: {
-                                                PlaylistCard(button: NavigationButtons.new)
-                                            })
-                                            .sheet(isPresented: $newPlaylistSheet) {
-                                                NewPlaylist()
-                                            }
-                                        if user.sourcePlaylist.owner.id == user.userId {
-                                            Button(action: {
-                                                // edit directly
-                                                user.destinationPlaylist = user.sourcePlaylist
-                                                goPlayer.toggle()
-                                                }, label: {
-                                                    PlaylistCard(button: NavigationButtons.edit)
-                                                })
-                                                .fullScreenCover(isPresented: $goPlayer) {
-                                                    withAnimation {
-                                                        InAppPlayView()
-                                                    }
-                                                }
+                    LazyVGrid(columns: twoColumnGrid, spacing: 8) {
+                        if filteredPlaylists.count == playlists.count {
+                            switch step {
+                                // show the search
+                            case .userSource:
+                                Button(action: {
+                                    searchSheet.toggle()
+                                }, label: {
+                                    PlaylistCard(button: NavigationButtons.search)
+                                })
+                                    .sheet(isPresented: $searchSheet) {
+                                        SearchSheet()
+                                    }
+                                // show the home
+                            case .searchSource:
+                                Button(action: {
+                                    goHome.toggle()
+                                }, label: {
+                                    PlaylistCard(button: NavigationButtons.home)
+                                })
+                                    .fullScreenCover(isPresented: $goHome) {
+                                        withAnimation {
+                                            LibraryView(step: LibrarySteps.userSource)
                                         }
                                     }
-                                }
-                                
-                                ForEach(filteredPlaylists, id: \.id) { playlist in
+                            case .destination:
+                                Button(action: {
+                                    // new playlist
+                                    newPlaylistSheet.toggle()
+                                }, label: {
+                                    PlaylistCard(button: NavigationButtons.new)
+                                })
+                                    .sheet(isPresented: $newPlaylistSheet) {
+                                        NewPlaylist()
+                                    }
+                                if user.sourcePlaylist.owner.id == user.userId {
                                     Button(action: {
-                                        if step == .destination {
-                                            user.destinationPlaylist = playlist
-                                        }
-                                        else {
-                                            user.sourcePlaylist = playlist
-                                        }
-                                        menuSheet.toggle()
-                                        }, label: {
-                                            PlaylistCard(playlist: playlist)
-                                        })
-                                        .sheet(isPresented: $menuSheet) {
-                                            if step == .destination {
-                                                PlaylistMenu(destination: true)
-                                            }
-                                            else {
-                                                PlaylistMenu(destination: false)
+                                        // edit directly
+                                        user.destinationPlaylist = user.sourcePlaylist
+                                        goPlayer.toggle()
+                                    }, label: {
+                                        PlaylistCard(button: NavigationButtons.edit)
+                                    })
+                                        .fullScreenCover(isPresented: $goPlayer) {
+                                            withAnimation {
+                                                InAppPlayView()
                                             }
                                         }
                                 }
                             }
-                            .padding(.horizontal)
+                        }
+                        
+                        ForEach(filteredPlaylists, id: \.id) { playlist in
+                            Button(action: {
+                                if step == .destination {
+                                    user.destinationPlaylist = playlist
+                                }
+                                else {
+                                    user.sourcePlaylist = playlist
+                                }
+                                menuSheet.toggle()
+                            }, label: {
+                                PlaylistCard(playlist: playlist)
+                            })
+                                .sheet(isPresented: $menuSheet) {
+                                    if step == .destination {
+                                        PlaylistMenu(destination: true)
+                                    }
+                                    else {
+                                        PlaylistMenu(destination: false)
+                                    }
+                                }
+                        }
+                        if step == LibrarySteps.userSource {
+                            Button(action: {
+                                // sign out
+                                signOut()
+                            }, label: {
+                                PlaylistCard(button: NavigationButtons.logout)
+                            })
+                                .fullScreenCover(isPresented: $signedOut) {
+                                    withAnimation {
+                                        LoginView()
+                                    }
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                    .background(Color.black)
-                    .navigationTitle(
-                        Text(text)
-                    )
+                .background(Color.black)
+                .navigationTitle(
+                    Text(text)
+                )
             }
             .searchable(text: $searchText)
             .onChange(of: playlists) { newValue in
@@ -151,11 +166,11 @@ struct LibraryView: View {
         .preferredColorScheme(.dark)
         .onAppear(perform: setUser)
         .alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text("Sorry!"),
-                    message: Text("We were unable to fetch the playlists.")
-                )
-            }
+            Alert(
+                title: Text("Sorry!"),
+                message: Text("We were unable to fetch the playlists.")
+            )
+        }
     }
     
     func loadData() {
@@ -220,6 +235,16 @@ struct LibraryView: View {
             }
         default:
             loadData()
+        }
+    }
+    
+    func signOut() {
+        apiCaller.authManager.signOut {result in
+            DispatchQueue.main.async {
+                if result {
+                    signedOut.toggle()
+                }
+            }
         }
     }
 }

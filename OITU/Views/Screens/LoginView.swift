@@ -13,9 +13,11 @@ struct LoginView: View {
     @State private var showingSheet = false
     
     var body: some View {
-        if let user = apiCaller.authManager.user {
-            LibraryView(step: .userSource)
-                .environmentObject(user)
+        if apiCaller.authManager.isSignedIn {
+            if let user = apiCaller.authManager.user {
+                LibraryView(step: .userSource)
+                    .environmentObject(user)
+            }
         }
         
         else {

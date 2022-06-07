@@ -23,12 +23,23 @@ struct SwiperView: View {
             Color.black.ignoresSafeArea()
             VStack {
                 // timber at the top with leave and help
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        backHome.toggle()
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(Color.green)
+                                .font(.system(size: 25))
+                                .padding([.trailing], 14)
+                        })
+                }
                 Text("timber")
                     .fontWeight(.bold)
                     .foregroundColor(Color.green)
                     .font(.system(size: 30))
                     .multilineTextAlignment(.center)
-                    .padding(.vertical, 18.0)
+//                    .padding(.vertical, 18.0)
                 // card for the track
                 ZStack {
                     VStack {
@@ -37,7 +48,10 @@ struct SwiperView: View {
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                         Button(action: {
-                            backHome = true
+//                            user.sourcePlaylist = Playlist(id: "", images: [], name: "", tracks: "", owner: <#T##Owner#>, uri: <#T##String#>)
+//                            user.destinationPlaylist = ""
+//                            user.playbackDevice = ""
+                            backHome.toggle()
                             }, label: {
                                 Text("Back to Library")
                                     .foregroundColor(Color.white)
@@ -140,7 +154,7 @@ struct SwiperView: View {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
-                    tracks = model.reversed()
+                    tracks = model.shuffled()
                     currentURI = tracks.last?.track.uri
                     play()
                 case .failure(let error):

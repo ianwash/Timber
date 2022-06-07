@@ -1,20 +1,22 @@
 //
-//  SearchSheet.swift
+//  NewPlaylist.swift
 //  OITU
 //
-//  Created by Ian Washabaugh on 6/4/22.
+//  Created by Ian Washabaugh on 6/5/22.
 //
 
+import Foundation
 import SwiftUI
 
-struct SearchSheet: View {
+struct NewPlaylist: View {
     @EnvironmentObject var user: User
     @EnvironmentObject var apiCaller: APICaller
     let dimension = UIScreen.main.bounds.width - 80
-    @State private var searchString = ""
+    @State private var newName = ""
     @State private var currentUser = ""
     @State private var showingAlert = false
     @State private var moveOn = false
+    
     
     init() {
         UITextView.appearance().backgroundColor = .clear
@@ -27,12 +29,11 @@ struct SearchSheet: View {
             Color.black.ignoresSafeArea()
             
             VStack {
-                Image(systemName: "person.2.fill")
+                Image(systemName: "rectangle.and.pencil.and.ellipsis")
                     .foregroundColor(Color.green)
                     .font(.system(size: 50))
                     .padding([.bottom], 10)
-                
-                Text("Go on, enter their user ID.")
+                Text("Let's give that playlist a name.")
                     .foregroundColor(Color.white)
                     .font(.system(size: 23))
                     .fontWeight(.bold)
@@ -40,42 +41,29 @@ struct SearchSheet: View {
                     .lineLimit(1)
                     .frame(width: dimension)
                     .minimumScaleFactor(0.5)
-                    .padding(3)
-                Text("\(currentUser)")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 17))
-                    .fontWeight(.bold)
-                    .scaledToFill()
-                    .lineLimit(1)
-                    .frame(width: dimension)
-                    .minimumScaleFactor(0.5)
-                    .opacity(0.5)
-                    .padding([.bottom], 20)
                 VStack {
-                    TextEditor(text: $searchString)
+                    TextEditor(text: $newName)
                         .keyboardType(.twitter)
-                        .onChange(of: searchString) { _ in
-                            if !searchString.filter({ $0.isNewline }).isEmpty {
-                                searchForUser()
+                        .onChange(of: newName) { _ in
+                            if !newName.filter({ $0.isNewline }).isEmpty {
+                                create()
                             }
                         }
                         .alert(isPresented: $showingAlert) {
                             Alert(
                                 title: Text("Sorry!"),
-                                message: Text("We were unable to find a user with that ID.")
+                                message: Text("We were unable to make a playlist with that name.")
                             )
                         }
                         .fullScreenCover(isPresented: $moveOn) {
                             withAnimation {
-                                // show searched library
-                                LibraryView(step: LibrarySteps.searchSource, userForPlaylists: searchString)
+                                InAppPlayView()
                             }
                         }
-//                        .foregroundColor(Color.green)
+                        .foregroundColor(Color.green)
                         .font(.system(size: 18))
-                        .frame(minWidth: dimension, idealWidth: dimension, maxWidth: dimension, minHeight: 35, idealHeight: 35, maxHeight: 35)
+                        .frame(minWidth: dimension, idealWidth: dimension, maxWidth: dimension, minHeight: 30, idealHeight: 30, maxHeight: 60)
                         .disableAutocorrection(true)
-                        .autocapitalization(.none)
                         .padding(5)
                 }
                 .overlay(
@@ -85,11 +73,10 @@ struct SearchSheet: View {
                 .padding([.bottom], 30)
                 
                 Button(action: {
-                    // to do
-                    searchForUser()
+                    create()
                 }, label: {
                     HStack {
-                        Text("Enter")
+                        Text("Done")
                             .padding()
                             .foregroundColor(Color.white)
                             .cornerRadius(8)
@@ -102,28 +89,31 @@ struct SearchSheet: View {
                     )
                     .fullScreenCover(isPresented: $moveOn) {
                         withAnimation {
-                            LibraryView(step: LibrarySteps.searchSource, userForPlaylists: searchString)
+                            InAppPlayView()
                         }
                     }
                 })
             }
             .frame(width: dimension)
             .onAppear {
-                // to do
-                currentUser = "ex: '\(user.userId)'"
+                newName = (user.sourcePlaylist.name) + " (Timber's Version)"
+            }
+            .onAppear {
+                print("on appear: \(moveOn)")
             }
         }
     }
     
-    func searchForUser() {
-        apiCaller.getOtherUserProfile(with: searchString) {result in
+    func create() {
+        apiCaller.createPlaylist(with: newName) {result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
-                    user.searchedUser = model.display_name
+                    // set the destination playlist
+                    user.destinationPlaylist = model
+                    print(user.destinationPlaylist)
                     moveOn.toggle()
                 case .failure(let error):
-                    print("failed")
                     print(error.localizedDescription)
                     showingAlert = true
                 }

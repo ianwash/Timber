@@ -35,4 +35,5 @@ enum NavigationButtons {
     case search
     case new
     case edit
+    case logout
 }
