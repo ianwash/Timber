@@ -10,10 +10,9 @@ Some cool additional features include real-time playback and the ability to acce
 This app was created in Swift using SwiftUI and interacts with the Spotify Web API.
 
 ## Walk Through 
-| Syntax      | Description |
+| Sign in with Spotify      | Select a playlist |
 | ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
+| ![](https://media.giphy.com/media/aiH6UuSuxYPv289nzk/giphy.gif)      | ![](https://media.giphy.com/media/6a6QK1oBZVRWQHJ09i/giphy.gif)       |
 
 | Syntax      | Description |
 | ----------- | ----------- |
