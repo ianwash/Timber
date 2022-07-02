@@ -9,6 +9,21 @@ Some cool additional features include real-time playback and the ability to acce
 ## About 
 This app was created in Swift using SwiftUI and interacts with the Spotify Web API.
 
-# Features 
-## Sign in with Spotify
+## Walk Through 
+### Sign in with Spotify
 ![](https://media.giphy.com/media/aiH6UuSuxYPv289nzk/giphy.gif)
+
+### Select a playlist
+![](https://media.giphy.com/media/6a6QK1oBZVRWQHJ09i/giphy.gif)
+
+### Find your friends 
+![](https://media.giphy.com/media/l9EQwVaVxnbzJYxhOp/giphy.gif)
+
+### Create a new playlist, if you want
+![](https://media.giphy.com/media/OP4YG6XqmKGV7ZSBI1/giphy.gif)
+
+### Configure playback
+![](https://media.giphy.com/media/0ay4mHn8Q0iDPzHyNX/giphy.gif)
+
+### Get swiping
+![](https://media.giphy.com/media/KgS7KQvPo5GlAyKL8o/giphy.gif)
