@@ -11,4 +11,4 @@ This app was created in Swift using SwiftUI and interacts with the Spotify Web A
 
 # Features 
 ## Sign in with Spotify
-![Sign In] (https://media.giphy.com/media/aiH6UuSuxYPv289nzk/giphy.gif)
+![] (https://media.giphy.com/media/aiH6UuSuxYPv289nzk/giphy.gif)
